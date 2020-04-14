@@ -322,11 +322,11 @@ int play(const string& inputFile) {
                                std::ref(audioProcessor));
   startAudioThread.join();
 
-  std::thread videoThread{playSdlVideo, std::ref(videoProcessor), &audioProcessor};
+  // std::thread videoThread{playSdlVideo, std::ref(videoProcessor), &audioProcessor};
 
-
+  playSdlVideo(videoProcessor, &audioProcessor); //在主线程中播放视频
   cout << "videoThread join." << endl;
-  videoThread.join();
+  //videoThread.join();
 
   SDL_PauseAudioDevice(audioDeviceID, 1);
   SDL_CloseAudio();
